@@ -1,0 +1,44 @@
+{
+	"jpsType": "update",
+	"jpsVersion": "0.2",
+	"application": {
+		"name": "Romania region-test",
+		"settings": {
+			"fields": [{
+					"type": "string",
+					"name": "stations",
+					"caption": {
+						"en": "Stations",
+						"ru": "Станции"
+					},
+					"required": false,
+					"default": "RO_ARCR RO_MLR RO_IAS RO_DRGR RO_BZS"
+				}
+			]
+		},
+		"onInstall": {
+			"call": "writeParams"
+		},
+		"procedures": [{
+				"id": "writeParams",
+				"onCall": [{
+						"executeShellCommands": [{
+								"nodeMission": "docker",
+								"commands": [
+										"yum install svn -y",
+										"svn export https://github.com/unigeocloud/scripts/trunk/import_inv_from_git.sh /tmp/import_inv_from_git.sh",
+										"echo \"${settings.stations}\" > /tmp/stations",
+										"su -l sysop -c \"bash /tmp/import_inv_from_git.sh\""
+								]
+							}
+						]
+					}
+				]
+			}
+		],
+		"success": {
+			"text": "Dashboard success text",
+			"email": "Email success text"
+		}
+	}
+}
