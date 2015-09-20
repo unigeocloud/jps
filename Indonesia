@@ -2,7 +2,8 @@
 	"jpsType": "update",
 	"jpsVersion": "0.2",
 	"application": {
-		"name": "Romania region-test",
+		"name": "Indonesia region",
+		"logo": "https://download.jelastic.com/public.php?service=files&t=55c571e9d53884b1a571e9120deef622&download",
 		"settings": {
 			"fields": [{
 					"type": "string",
@@ -12,7 +13,7 @@
 						"ru": "Станции"
 					},
 					"required": false,
-					"default": "RO_ARCR RO_MLR RO_IAS RO_DRGR RO_BZS RO_BUR01 RO_BUR02 RO_BUR03 RO_BUR04 RO_BUR05 RO_BUR06 RO_BUR07 RO_BUR08 RO_BUR09"
+					"default": "GE_LUWI GE_GSI GE_BKNI GE_BKB GE_PMBT GE_SAUI GE_MNAI GE_SOEI GE_TOLI2 GE_FAKI GE_CISI GE_PLAI XN_BOG XN_BUM XN_KEM Z6_AFB"
 				}
 			]
 		},
