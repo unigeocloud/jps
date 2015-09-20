@@ -1,8 +1,8 @@
-{
-	"jpsType": "update",
+Type": "update",
 	"jpsVersion": "0.2",
 	"application": {
-		"name": "Romania region-test",
+		"name": "World region",
+		"logo": "https://download.jelastic.com/public.php?service=files&t=5b8bb5a804ebc2912c7c77b87d5bd252&download",
 		"settings": {
 			"fields": [{
 					"type": "string",
@@ -12,7 +12,7 @@
 						"ru": "Станции"
 					},
 					"required": false,
-					"default": "RO_ARCR RO_MLR RO_IAS RO_DRGR RO_BZS"
+					"default": "FR_RUSF II_CMLA II_CMLA II_ARU II_BFO II_BORG II_BRVK II_ESK II_KIV II_AAK GE_SNAA GE_APE II_ARU II_OBN II_LVZ II_SACV IU_GNI IU_ANTO IU_KBS IU_GRFO IU_KEV IU_KONO IU_PAB IU_MAIU_SFJD RO_ARCR RO_BUR09 RO_BUR05 RO_BUR03 RO_BUR02 RO_BUR01 RO_BUC1 RO_BUR06 RO_BUR07 RO_BZS RO_BUR08 RO_CRAR RO_DRGR RO_MANR RO_IAS RO_MLR RO_VRI WM_SFS"
 				}
 			]
 		},
