@@ -13,7 +13,7 @@
 						"ru": "Станции"
 					},
 					"required": false,
-					"default": "GE_LUWI GE_GSI GE_BKNI GE_BKB GE_PMBT GE_SAUI GE_MNAI GE_SOEI GE_TOLI2 GE_FAKI GE_CISI GE_PLAI XN_BOG XN_BUM XN_KEM Z6_AFB"
+					"default": "GE_LUWI GE_GSI GE_BKB GE_PMBT GE_SAUI GE_SOEI GE_TOLI2 GE_FAKI GE_CISI GE_PLAI XN_BOG XN_BUM XN_KEM Z6_AFB"
 				}
 			]
 		},
