@@ -26,7 +26,7 @@
 						"executeShellCommands": [{
 								"nodeMission": "docker",
 								"commands": [
-										"svn export https://github.com/unigeocloud/scripts/trunk/import_inv_from_git.sh /tmp/import_inv_from_git.sh 2>/dev/null",
+										"svn export https://github.com/unigeocloud/scripts/trunk/import_inv_from_git.sh /tmp/import_inv_from_git.sh",
 										"echo \"${settings.stations}\" > /tmp/stations 2>/dev/null",
 										"su -l sysop -c \"bash /tmp/import_inv_from_git.sh 2>/dev/null\" 2>/dev/null 1>/dev/null"
 								]
