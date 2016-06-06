@@ -1,0 +1,47 @@
+{
+	"jpsType": "install",
+	"application": {
+		"description": "Extened NDC in the Box",
+		"name": "Extened NDC in the Box",
+		"env": {
+			"topology": {
+				"nodes": [{
+						"docker": {
+							"image": "ukrainendc/eniab-db:latest"
+						},
+						"flexibleCloudlets": 4,
+						"nodeGroup": "sqldb",
+						"nodeType": "docker",
+						"displayName": "DataBase"
+					}, {
+						"docker": {
+							"image": "ukrainendc/seiscomp:latest",
+							"links": "sqldb:db"
+						},
+						"flexibleCloudlets": 8,
+						"nodeType": "docker",
+						"nodeGroup": "seiscomp",
+						"displayName": "SeisComP"
+					}, {
+						"docker": {
+							"volumeMounts": {
+								"/home/sysop/data": {
+									"readOnly": false,
+									"sourcePath": "/home/sysop/seiscomp3/var/lib/archive",
+									"sourceNodeGroup": "seiscomp"
+								}
+							},
+							"image": "ukrainendc/geotool:latest",
+							"links": "sqldb:db",
+							"volumes": ["/home/sysop/data"]
+						},
+						"flexibleCloudlets": 8,
+						"nodeType": "docker",
+						"displayName": "GeoTool"
+					}
+				]
+			}
+		},
+		"homepage": "http://unigeo.cloud/"
+	}
+}
