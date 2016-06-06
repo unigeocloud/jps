@@ -31,7 +31,7 @@
 									"sourceNodeGroup": "seiscomp"
 								}
 							},
-							"image": "ukrainendc/geotool:latest",
+							"image": "ukrainendc/eniab-geotool:latest",
 							"links": "sqldb:db",
 							"volumes": ["/home/sysop/data"]
 						},
