@@ -1,8 +1,8 @@
 {
 	"jpsType": "install",
 	"application": {
-		"description": "Extened NDC in the Box",
-		"name": "Extened NDC in the Box",
+		"description": "Extended-NDC-in-a-Box",
+		"name": "Extended-NDC-in-a-Box",
 		"env": {
 			"topology": {
 				"nodes": [{
@@ -12,7 +12,7 @@
 						"flexibleCloudlets": 4,
 						"nodeGroup": "sqldb",
 						"nodeType": "docker",
-						"displayName": "DataBase"
+						"displayName": "ENIAB-DB"
 					}, {
 						"docker": {
 							"image": "ukrainendc/seiscomp:latest",
@@ -21,7 +21,7 @@
 						"flexibleCloudlets": 8,
 						"nodeType": "docker",
 						"nodeGroup": "seiscomp",
-						"displayName": "SeisComP"
+						"displayName": "ENIAB-SeisComP"
 					}, {
 						"docker": {
 							"volumeMounts": {
@@ -37,7 +37,7 @@
 						},
 						"flexibleCloudlets": 8,
 						"nodeType": "docker",
-						"displayName": "GeoTool"
+						"displayName": "ENIAB-GeoTool"
 					}
 				]
 			}
