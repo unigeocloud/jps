@@ -15,7 +15,7 @@
 						"displayName": "ENIAB-DB"
 					}, {
 						"docker": {
-							"image": "ukrainendc/seiscomp:latest",
+							"image": "ukrainendc/eniab-seiscomp:latest",
 							"links": "sqldb:db"
 						},
 						"flexibleCloudlets": 8,
