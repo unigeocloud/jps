@@ -9,7 +9,7 @@
 						"docker": {
 							"image": "ukrainendc/eniab-db:latest"
 						},
-						"flexibleCloudlets": 4,
+						"cloudlets": 16,
 						"nodeGroup": "sqldb",
 						"nodeType": "docker",
 						"displayName": "ENIAB-DB"
@@ -18,7 +18,7 @@
 							"image": "ukrainendc/eniab-seiscomp:latest",
 							"links": "sqldb:db"
 						},
-						"flexibleCloudlets": 8,
+						"cloudlets": 32,
 						"nodeType": "docker",
 						"nodeGroup": "seiscomp",
 						"displayName": "ENIAB-SeisComP"
@@ -35,7 +35,7 @@
 							"links": "sqldb:db",
 							"volumes": ["/home/sysop/data"]
 						},
-						"flexibleCloudlets": 8,
+						"cloudlets": 32,
 						"nodeType": "docker",
 						"displayName": "ENIAB-GeoTool"
 					}
