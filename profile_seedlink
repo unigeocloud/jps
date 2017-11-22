@@ -1,0 +1,27 @@
+# Activated plugins for category sources
+sources = local_server1:chain, local_server2:chain, local_server3:chain
+
+# Hostname or IP of the Seedlink server.
+#sources.local_server1.address = rtserve1.portal.unigeocloud.com
+
+sources.local_server1.address = rtserve.iris.washington.edu
+
+# List of stream selectors. If left empty all available streams will be
+# requested. See slinktool manpage for more information.
+sources.local_server1.selectors = ?HZ.D
+
+# Hostname or IP of the Seedlink server.
+#sources.local_server2.address = rtserve2.portal.unigeocloud.com
+
+sources.local_server2.address = geofon.gfz-potsdam.de
+
+# List of stream selectors. If left empty all available streams will be
+# requested. See slinktool manpage for more information.
+sources.local_server2.selectors = ?HZ.D
+
+# Hostname or IP of the Seedlink server.
+sources.local_server3.address = rtserve2.portal.unigeocloud.com
+
+# List of stream selectors. If left empty all available streams will be
+# requested. See slinktool manpage for more information.
+sources.local_server3.selectors = ?HZ.D
