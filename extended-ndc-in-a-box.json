@@ -1,47 +1,71 @@
 {
-	"jpsType": "install",
-	"application": {
-		"description": "Extended-NDC-in-a-Box",
-		"name": "Extended-NDC-in-a-Box",
-		"env": {
-			"topology": {
-				"nodes": [{
-						"docker": {
-							"image": "ukrainendc/eniab-db:latest"
-						},
-						"cloudlets": 16,
-						"nodeGroup": "sqldb",
-						"nodeType": "docker",
-						"displayName": "ENIAB-DB"
-					}, {
-						"docker": {
-							"image": "ukrainendc/eniab-seiscomp:latest",
-							"links": "sqldb:db"
-						},
-						"cloudlets": 32,
-						"nodeType": "docker",
-						"nodeGroup": "seiscomp",
-						"displayName": "ENIAB-SeisComP"
-					}, {
-						"docker": {
-							"volumeMounts": {
-								"/home/sysop/data": {
-									"readOnly": false,
-									"sourcePath": "/home/sysop/seiscomp3/var/lib/archive",
-									"sourceNodeGroup": "seiscomp"
-								}
-							},
-							"image": "ukrainendc/eniab-geotool:latest",
-							"links": "sqldb:db",
-							"volumes": ["/home/sysop/data"]
-						},
-						"cloudlets": 32,
-						"nodeType": "docker",
-						"displayName": "ENIAB-GeoTool"
-					}
-				]
-			}
-		},
-		"homepage": "https://www.ctbto.org/"
-	}
+    "jpsType": "install",
+    "application": {
+        "description": "Extended-NDC-in-a-Box",
+        "name": "Extended-NDC-in-a-Box",
+        "homepage": "https://www.ctbto.org/",
+        "env": {
+            "topology": {
+                "nodes": [{
+                    "docker": {
+                        "image": "ukrainendc/eniab-db:latest"
+                    },
+                    "cloudlets": 16,
+                    "nodeGroup": "sqldb",
+                    "nodeType": "docker",
+                    "displayName": "ENIAB-DB"
+                }, {
+                    "docker": {
+                        "image": "ukrainendc/eniab-seiscomp:latest",
+                        "links": "sqldb:db"
+                    },
+                    "cloudlets": 32,
+                    "nodeType": "docker",
+                    "nodeGroup": "seiscomp",
+                    "displayName": "ENIAB-SeisComP",
+                    "addons": ["region"]
+                }, {
+                    "docker": {
+                        "volumeMounts": {
+                            "/home/sysop/data": {
+                                "readOnly": false,
+                                "sourcePath": "/home/sysop/seiscomp3/var/lib/archive",
+                                "sourceNodeGroup": "seiscomp"
+                            }
+                        },
+                        "image": "ukrainendc/eniab-geotool:latest",
+                        "links": "sqldb:db",
+                        "volumes": ["/home/sysop/data"]
+                    },
+                    "cloudlets": 32,
+                    "nodeType": "docker",
+                    "displayName": "ENIAB-GeoTool"
+                }]
+            }
+        },
+        "globals": {
+            "stations": "RO_ARCR RO_MLR RO_IAS RO_DRGR RO_BZS RO_BUR01 RO_BUR02 RO_BUR03 RO_BUR04 RO_BUR05 RO_BUR06 RO_BUR07 RO_BUR08 RO_BUR09"
+        },
+        "addons": [{
+            "id": "region",
+            "name": "Romania region",
+            "buttons": {
+                "procedure": "writeParams",
+                "caption": "Install region",
+                "successText": "Region has been installed."
+            }
+        }],
+        "procedures": [{
+            "id": "writeParams",
+            "onCall": [{
+                "executeShellCommands": [{
+                    "commands": [
+                        "wget https://raw.githubusercontent.com/unigeocloud/jps/master/profile_seedlink -O /home/sysop/seiscomp3/etc/key/seedlink/profile_seedlink",
+                        "svn export https://github.com/unigeocloud/scripts/trunk/import_inv_from_git.sh /tmp/import_inv_from_git.sh 2>/dev/null", "echo \"${globals.stations}\" > /tmp/stations 2>/dev/null", "su -l sysop -c \"bash /tmp/import_inv_from_git.sh 2>/dev/null\" 2>/dev/null 1>/dev/null"
+                    ],
+                    "nodeGroup": "seiscomp"
+                }]
+            }]
+        }]
+    }
 }
