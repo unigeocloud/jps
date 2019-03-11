@@ -1,43 +1,27 @@
-{
-	"jpsType": "update",
-	"jpsVersion": "0.2",
-	"application": {
-		"name": "Romania region-test",
-		"settings": {
-			"fields": [{
-					"type": "string",
-					"name": "stations",
-					"caption": {
-						"en": "Stations",
-						"ru": "Станции"
-					},
-					"required": false,
-					"default": "RO_ARCR RO_MLR RO_IAS RO_DRGR RO_BZS RO_BUR01 RO_BUR02 RO_BUR03 RO_BUR04 RO_BUR05 RO_BUR06 RO_BUR07 RO_BUR08 RO_BUR09"
-				}
-			]
-		},
-		"onInstall": {
-			"call": "writeParams"
-		},
-		"procedures": [{
-				"id": "writeParams",
-				"onCall": [{
-						"executeShellCommands": [{
-								"nodeMission": "docker",
-								"commands": [
-										"svn export https://github.com/unigeocloud/scripts/trunk/import_inv_from_git.sh /tmp/import_inv_from_git.sh 2>/dev/null",
-										"echo \"${settings.stations}\" > /tmp/stations 2>/dev/null",
-										"su -l sysop -c \"bash /tmp/import_inv_from_git.sh 2>/dev/null\" 2>/dev/null 1>/dev/null"
-								]
-							}
-						]
-					}
-				]
-			}
-		],
-		"success": {
-			"text": "Dashboard success text",
-			"email": "Email success text"
-		}
-	}
-}
+jpsType: update
+name: Romania Test Region
+jpsVersion: '0.2'
+settings:
+  fields:
+    - default: RO_ARCR RO_MLR RO_IAS RO_DRGR RO_BZS RO_BUR01 RO_BUR02 RO_BUR03 RO_BUR04
+               RO_BUR05 RO_BUR06 RO_BUR07 RO_BUR08 RO_BUR09
+      name: stations
+      caption:
+        en: Stations
+        ru: Станции
+      type: string
+      required: false
+success:
+    text: Test region has been successfully added to the processing.
+    email: Test region has been successfully added to the processing.
+
+onInstall:
+  - writeParams
+
+actions:
+  writeParams:
+      cmd[docker]: |-
+        wget https://raw.githubusercontent.com/unigeocloud/jps/master/profile_seedlink -O /home/sysop/seiscomp3/etc/key/seedlink/profile_seedlink
+        svn export https://github.com/unigeocloud/scripts/trunk/import_inv_from_git.sh /tmp/import_inv_from_git.sh 2>/dev/null
+        echo "${settings.stations}" > /tmp/stations 2>/dev/null
+        su -l sysop -c "bash /tmp/import_inv_from_git.sh 2>/dev/null" 2>/dev/null 1>/dev/null
