@@ -1,44 +1,26 @@
-{
-	"jpsType": "update",
-	"jpsVersion": "0.2",
-	"application": {
-		"name": "Indonesia region",
-		"logo": "https://download.jelastic.com/public.php?service=files&t=55c571e9d53884b1a571e9120deef622&download",
-		"settings": {
-			"fields": [{
-					"type": "string",
-					"name": "stations",
-					"caption": {
-						"en": "Stations",
-						"ru": "Станции"
-					},
-					"required": false,
-					"default": "GE_LUWI GE_GSI GE_BKB GE_PMBT GE_SAUI GE_SOEI GE_TOLI2 GE_FAKI GE_CISI GE_PLAI XN_BOG XN_BUM XN_KEM Z6_AFB"
-				}
-			]
-		},
-		"onInstall": {
-			"call": "writeParams"
-		},
-		"procedures": [{
-				"id": "writeParams",
-				"onCall": [{
-						"executeShellCommands": [{
-								"nodeMission": "docker",
-								"commands": [
-										"svn export https://github.com/unigeocloud/scripts/trunk/import_inv_from_git.sh /tmp/import_inv_from_git.sh",
-										"echo \"${settings.stations}\" > /tmp/stations 2>/dev/null",
-										"su -l sysop -c \"bash /tmp/import_inv_from_git.sh 2>/dev/null\" 2>/dev/null 1>/dev/null"
-								]
-							}
-						]
-					}
-				]
-			}
-		],
-		"success": {
-			"text": "Dashboard success text",
-			"email": "Email success text"
-		}
-	}
-}
+jpsType: update
+name: Indonesia Test Region
+jpsVersion: '0.2'
+settings:
+  fields:
+    - default: GE_LUWI GE_GSI GE_BKB GE_PMBT GE_SAUI GE_SOEI GE_TOLI2 GE_FAKI GE_CISI GE_PLAI XN_BOG XN_BUM XN_KEM Z6_AFB
+      name: stations
+      caption:
+        en: Stations
+        ru: Станции
+      type: string
+      required: false
+success:
+    text: Test region has been successfully added to the processing.
+    email: Test region has been successfully added to the processing.
+
+onInstall:
+  - writeParams
+
+actions:
+  writeParams:
+      cmd[docker]: |-
+        wget https://raw.githubusercontent.com/unigeocloud/jps/master/profile_seedlink -O /home/sysop/seiscomp3/etc/key/seedlink/profile_seedlink
+        svn export https://github.com/unigeocloud/scripts/trunk/import_inv_from_git.sh /tmp/import_inv_from_git.sh 2>/dev/null
+        echo "${settings.stations}" > /tmp/stations 2>/dev/null
+        su -l sysop -c "bash /tmp/import_inv_from_git.sh 2>/dev/null" 2>/dev/null 1>/dev/null
