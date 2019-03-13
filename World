@@ -1,43 +1,29 @@
-Type": "update",
-	"jpsVersion": "0.2",
-	"application": {
-		"name": "World region",
-		"logo": "https://download.jelastic.com/public.php?service=files&t=5b8bb5a804ebc2912c7c77b87d5bd252&download",
-		"settings": {
-			"fields": [{
-					"type": "string",
-					"name": "stations",
-					"caption": {
-						"en": "Stations",
-						"ru": "Станции"
-					},
-					"required": false,
-					"default": "FR_RUSF II_CMLA II_CMLA II_ARU II_BFO II_BORG II_BRVK II_ESK II_KIV II_AAK GE_SNAA GE_APE II_ARU II_OBN II_LVZ II_SACV IU_GNI IU_ANTO IU_KBS IU_GRFO IU_KEV IU_KONO IU_PAB IU_MAIU_SFJD RO_ARCR RO_BUR09 RO_BUR05 RO_BUR03 RO_BUR02 RO_BUR01 RO_BUC1 RO_BUR06 RO_BUR07 RO_BZS RO_BUR08 RO_CRAR RO_DRGR RO_MANR RO_IAS RO_MLR RO_VRI WM_SFS"
-				}
-			]
-		},
-		"onInstall": {
-			"call": "writeParams"
-		},
-		"procedures": [{
-				"id": "writeParams",
-				"onCall": [{
-						"executeShellCommands": [{
-								"nodeMission": "docker",
-								"commands": [
-										"svn export https://github.com/unigeocloud/scripts/trunk/import_inv_from_git.sh /tmp/import_inv_from_git.sh 2>/dev/null",
-										"echo \"${settings.stations}\" > /tmp/stations 2>/dev/null",
-										"su -l sysop -c \"bash /tmp/import_inv_from_git.sh 2>/dev/null\" 2>/dev/null 1>/dev/null"
-								]
-							}
-						]
-					}
-				]
-			}
-		],
-		"success": {
-			"text": "Dashboard success text",
-			"email": "Email success text"
-		}
-	}
-}
+jpsType: update
+name: World Test Region
+jpsVersion: '0.2'
+settings:
+  fields:
+    - default: FR_RUSF II_CMLA II_CMLA II_ARU II_BFO II_BORG II_BRVK II_ESK II_KIV 
+              II_AAK GE_SNAA GE_APE II_ARU II_OBN II_LVZ II_SACV IU_GNI IU_ANTO IU_KBS IU_GRFO IU_KEV 
+              IU_KONO IU_PAB IU_MAIU_SFJD RO_ARCR RO_BUR09 RO_BUR05 RO_BUR03 RO_BUR02 RO_BUR01 
+              RO_BUC1 RO_BUR06 RO_BUR07 RO_BZS RO_BUR08 RO_CRAR RO_DRGR RO_MANR RO_IAS RO_MLR RO_VRI WM_SFS
+      name: stations
+      caption:
+        en: Stations
+        ru: Станции
+      type: string
+      required: false
+success:
+    text: Test region has been successfully added to the processing.
+    email: Test region has been successfully added to the processing.
+
+onInstall:
+  - writeParams
+
+actions:
+  writeParams:
+      cmd[docker]: |-
+        wget https://raw.githubusercontent.com/unigeocloud/jps/master/profile_seedlink -O /home/sysop/seiscomp3/etc/key/seedlink/profile_seedlink
+        svn export https://github.com/unigeocloud/scripts/trunk/import_inv_from_git.sh /tmp/import_inv_from_git.sh 2>/dev/null
+        echo "${settings.stations}" > /tmp/stations 2>/dev/null
+        su -l sysop -c "bash /tmp/import_inv_from_git.sh 2>/dev/null" 2>/dev/null 1>/dev/null
